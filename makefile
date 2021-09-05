@@ -17,10 +17,10 @@ LDIR =./lib
 
 LIBS=-lm
 
-_DEPS = terminal.h
+_DEPS = terminal.h options.h arg_parse.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ  = main.o terminal.o
+_OBJ  = main.o terminal.o arg_parse.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
