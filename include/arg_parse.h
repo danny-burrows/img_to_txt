@@ -10,7 +10,7 @@
 
 #define STR_EQUAL 0
 
-#define VERSION "v0.1.1"
+#define VERSION "v0.1.2"
 
 #define HELP "Usage: img_to_txt [OPTION]... [FILE]...                       \n\
 Convert images to text. Either Ascii, Ansi (true colour),                   \n\
@@ -68,5 +68,7 @@ typedef struct _FileJob {
 } FileJob;
 
 FileJob * arg_parse(int argc, char ** argv, ImageOptions * opts);
+
+void free_job_memory(FileJob * job_list);
 
 #endif

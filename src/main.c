@@ -53,9 +53,9 @@ unsigned char calc_ascii_char(PixelData * p) {
 }
 
 
-int read_and_convert(char * filename, ImageOptions * options) {
+int read_and_convert(char * filepath, ImageOptions * options) {
     int rwidth, rheight, rchannels;
-    unsigned char * read_data = stbi_load(filename, &rwidth, &rheight, &rchannels, 3);
+    unsigned char * read_data = stbi_load(filepath, &rwidth, &rheight, &rchannels, 3);
 
     if (read_data == NULL) {
         fprintf(stderr, "Error reading image data!\n\n");
@@ -95,9 +95,18 @@ int read_and_convert(char * filename, ImageOptions * options) {
     }
 
     // Print header if required...
-    if (options->suppress_header == false) {
-        printf("Img Type: %s\nTrue Color: %d\nSize: %dx%d\n", OutputModeStr[options->output_mode], options->true_color, desired_width, desired_height);
-    }
+    if (options->suppress_header == false) 
+        printf(
+            "Converting File: %s\n"
+            "Img Type: %s\n"
+            "True Color: %d\n"
+            "Size: %dx%d\n", 
+            filepath, 
+            OutputModeStr[options->output_mode], 
+            options->true_color, 
+            desired_width, 
+            desired_height
+        );
 
     for (unsigned int d = 0; d < desired_width * desired_height; d++)
     {
@@ -148,15 +157,8 @@ int main(int argc, char ** argv) {
     FileJob * jobs = arg_parse(argc, argv, &opts);
     if (jobs == NULL) return EXIT_FAILURE;
 
-    if (jobs == NULL) {
-         fprintf(stderr, "No files to convert! (-? for help text)\n");
-         return EXIT_FAILURE;
-    }
-
     // Parse file paths and do all jobs.
-    for (FileJob * read_jobs = jobs; read_jobs != NULL; read_jobs = read_jobs->nextJob) {
-        if (opts.suppress_header == false) printf("Converting File: %s\n", read_jobs->path);
-    
+    for (FileJob * read_jobs = jobs; read_jobs != NULL; read_jobs = read_jobs->nextJob) {    
         int r = read_and_convert(read_jobs->path, &opts);
         if (r == -1) {
             fprintf(stderr, "Failed to convert image: %s\n", read_jobs->path);
@@ -165,12 +167,7 @@ int main(int argc, char ** argv) {
     }
 
     // Free job memory!
-    FileJob * f = jobs;
-    while (f != NULL) {
-        FileJob * next = f->nextJob;
-        free(f);
-        f = next;
-    }
+    free_job_memory(jobs);
 
     return EXIT_SUCCESS;
 }

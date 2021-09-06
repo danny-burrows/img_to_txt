@@ -30,6 +30,14 @@ static int get_opt_int_param(int argc, char ** argv, int opt) {
     return param;
 }
 
+void free_job_memory(FileJob * job_list) {
+    while (job_list != NULL) {
+        FileJob * next = job_list->nextJob;
+        free(job_list);
+        job_list = next;
+    }
+}
+
 FileJob * arg_parse(int argc, char ** argv, ImageOptions * opts) {
     // Returns a pointer to FileJobs array or NULL.
 
@@ -127,5 +135,7 @@ FileJob * arg_parse(int argc, char ** argv, ImageOptions * opts) {
         }
         if (read_param) opt++;
     }
+
+    if (jobs == NULL) fprintf(stderr, "No files to convert! (-? for help text)\n");
     return jobs;
 }
