@@ -1,26 +1,25 @@
 <div align="center">
     <img src="img_to_txt.svg" style="width: 80%;" />
-    <hr/>
 </div>
 
-<h1 align="center" style="border-bottom: none;">🚧 In Early Development 🚧</h1>
+<h1 align="center">🚧 In Early Development 🚧</h1>
 
-<strong>img_to_txt</strong> is still in early development but feel free to try it out! See the Build and Usage sections for more details. If you'd like to get involved please see the Contributing section. Also please submit an issue if you have any issues using or building.
+<strong>img_to_txt</strong> is still in early development but feel free to try it out! See the Build and Usage sections for more details on getting started. If you'd like to get involved please see the Contributing section. Also please submit an issue if you have any issues using or building.
 
 ### Platforms
 Currently just Linux but Windows coming soon!
 
-### Image types
-Img Type      | Support Status
+### Supported Images
+Image Type      | Supported
 ------------- | -------------
-jpg/jpeg      | Full 
+jpg           | Full 
 png           | Full 
 bmp           | Full
 tga           | Most Subsets
-hdr           | rgbE Formats
+hdr           | RGBE Format
 gif           | Static
 pic           | Softimage
-pnm           | pgm/ppm Binary only
+pnm/pgm/ppm   | Binary only
 
 ## Build
 ```bash
