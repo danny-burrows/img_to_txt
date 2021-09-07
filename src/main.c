@@ -3,8 +3,6 @@ NOTE: Eventually true color should not be the default.
 
 TODO:
     - Debug what happens when piped to a file.
-    - Add support for long args.
-    - Test all image types in stb_image.
     - Improve the scale for plane ASCII output.
     - Windows support.
 */

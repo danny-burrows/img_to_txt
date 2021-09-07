@@ -34,8 +34,6 @@ Usage: img_to_txt [OPTION]... [FILE]...
 Convert images to text. Either Ascii, Ansi (true colour),                   
 or solid background (Ansi true color).                                      
                                                                             
-Note: Long arg (--example) not yet supported.                               
-                                                                            
 Available input image types:                                                
     - jpg/jpeg                                                              
     - png                                                                   
@@ -47,26 +45,26 @@ Available input image types:
     - ppm/pnm/pgm                                                           
                                                                             
 Options:                                                                    
-    -w <width>          Set width and height (rows and cols) of output.     
-    -h <height>                                                             
+    -w --width          Set width and height (rows and cols) of output.     
+    -h --height                                                             
                                                                             
-    -o                  Output original size. (Size of image in text)       
+    -o --original-size  Output original size. (Size of image in text)       
                                                                             
-    -a                  Ascii mode. (no ansi colors)                        
-    -s                  Solid mode. (Background colors with no ascii chars) 
+    -a --ascii          Ascii mode. (no ansi colors)                        
+    -s --solid          Solid mode. (Background colors with no ascii chars) 
                                                                             
-    -t                  Use true color for ANSI output.                     
+    -t --true-color     Use true color for ANSI output.                     
                         (Need true-color supported terminal)                
                                                                             
-    -n                  Disable standard image squashing that tries to make 
+    -n --no-squashing   Disable standard image squashing that tries to make 
                         image look less elongated by chars being taller than
                         they are wide.                                      
                                                                             
-    -q                  Quiet mode (suppress header)                        
+    -q --quiet          Quiet mode (suppress header)                        
                                                                             
-    -?                  Print help message and exit.                        
+    -? --help           Print help message and exit.                        
                                                                             
-    -v                  Print version and exit.                             
+    -v --version        Print version and exit.                             
                                                                             
 Examples:                                                                   
                                                                             
@@ -76,7 +74,7 @@ Examples:
                                                                             
     img_to_txt some_img.jpg -a                                              
                                                                             
-    img_to_txt -q -t -o some_img.bmp                                        
+    img_to_txt -q -t -o some_img.bmp                                                                     
 ```
 
 ## Contributing
