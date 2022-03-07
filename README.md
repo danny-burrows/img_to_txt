@@ -2,8 +2,6 @@
     <img src="img_to_txt.svg" style="width: 80%;" />
 </div>
 
-<h1 align="center">🚧 In Early Development 🚧</h1>
-
 <strong>img_to_txt</strong> is still in early development but feel free to try it out! See the Build and Usage sections for more details on getting started. If you'd like to get involved please see the Contributing section. Also please submit an issue if you have any issues using or building.
 
 ### Platforms

@@ -106,9 +106,12 @@ int read_and_convert(char * filepath, ImageOptions * options) {
             desired_height
         );
 
+    if (!options->suppress_header) printf("\n");
+
     for (unsigned int d = 0; d < desired_width * desired_height; d++)
     {
-        if (d % desired_width == 0){
+        if (d % desired_width == 0 && d != 0){
+            if(options->output_mode == SOLID_ANSI) printf("\033[0m");
             printf("\n");
         }
 
@@ -123,13 +126,13 @@ int read_and_convert(char * filepath, ImageOptions * options) {
             printf("\033[38;2;%03u;%03u;%03um%c", c->r, c->g, c->b, calc_ascii_char(c));
             break;
         case SOLID_ANSI:
-            printf("\033[48;2;%03u;%03u;%03um \033[0m", c->r, c->g, c->b);
+            printf("\033[48;2;%03u;%03u;%03um ", c->r, c->g, c->b);
             break;
         default:
             break;
         }
-        printf("\033[0m");
     }
+    if(options->output_mode == SOLID_ANSI) printf("\033[0m");
     printf("\n");
 
     stbi_image_free(data);
