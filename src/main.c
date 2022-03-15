@@ -146,24 +146,15 @@ int main(int argc, char ** argv) {
     printf("[DEBUG] ASCII Brightness levels: %d\n", brightness_levels);
 #endif
 
-    // Default options
-    ImageOptions opts = {
-        .output_mode = ANSI,
-        .original_size = false,
-        .true_color = true,
-        .squashing_enabled = true,
-        .suppress_header = false
-    };
-
-    FileJob * jobs = arg_parse(argc, argv, &opts);
-    if (jobs == NULL) return EXIT_FAILURE;
+    FileJob * jobs = arg_parse(argc, argv);
+    if (jobs == NULL)
+        return EXIT_FAILURE;
 
     // Parse file paths and do all jobs.
-    for (FileJob * read_jobs = jobs; read_jobs != NULL; read_jobs = read_jobs->nextJob) {    
-        int r = read_and_convert(read_jobs->path, &opts);
-        if (r == -1) {
-            fprintf(stderr, "Failed to convert image: %s\n", read_jobs->path);
-        }
+    for (FileJob * fj_iter = jobs; fj_iter != NULL; fj_iter = fj_iter->next_job) {    
+        int ret = read_and_convert(fj_iter->file_path, fj_iter->file_opts);
+        if (ret == -1)
+            fprintf(stderr, "Failed to convert image: %s\n", fj_iter->file_path);
         printf("\n");
     }
 

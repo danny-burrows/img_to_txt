@@ -8,7 +8,7 @@
 
 #include "options.h"
 
-#define STR_EQUAL 0
+// #define STR_EQUAL 0      // deprecated
 
 #define VERSION "v0.2.0"
 
@@ -60,12 +60,13 @@ Examples:                                                                   \n\
 "
 
 
-typedef struct _FileJob {
-    char * path;
-    struct _FileJob * nextJob;
+typedef struct FileJob {
+    char * file_path;
+    ImageOptions * file_opts;
+    struct FileJob * next_job;
 } FileJob;
 
-FileJob * arg_parse(int argc, char ** argv, ImageOptions * opts);
+FileJob * arg_parse(int argc, char ** argv);
 
 void free_job_memory(FileJob * job_list);
 
