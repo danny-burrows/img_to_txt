@@ -1,5 +1,7 @@
 #include "arg_parse.h"
 
+#define MAX_IMG_SIZE 25000
+
 static void print_version(void) {
     printf("img_to_text %s\n", VERSION);
 }
@@ -56,8 +58,8 @@ static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts
 
             case 'w':
                 width = get_opt_int_param(argc, argv, opt);
-                if (width < 0) {
-                    fprintf(stderr, "[ERR] Width is non-zero!\n");
+                if (width > MAX_IMG_SIZE) {
+                    fprintf(stderr, "[ERR] Width exceeds maximum image size!\n");
                     return -1;
                 }
                 opts->width = width;
@@ -65,8 +67,8 @@ static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts
                 break;
             case 'h':
                 height = get_opt_int_param(argc, argv, opt);
-                if (height < 0) {
-                    fprintf(stderr, "[ERR] Height is non-zero!\n");
+                if (height > MAX_IMG_SIZE) {
+                    fprintf(stderr, "[ERR] Height exceeds maximum image size!\n");
                     return -1;
                 }
                 opts->height = height;
@@ -116,8 +118,8 @@ static int parse_long_arg(int argc, char ** argv, int opt, ImageOptions * opts) 
 
     } else if ( !strcmp("--width", argv[opt]) ) {
         width = get_opt_int_param(argc, argv, opt);
-        if (width < 0) {
-            fprintf(stderr, "[ERR] Width is non-zero!\n");
+        if (width > MAX_IMG_SIZE) {
+            fprintf(stderr, "[ERR] Width exceeds maximum image size!\n");
             return -1;
         }
         opts->width = width;
@@ -125,8 +127,8 @@ static int parse_long_arg(int argc, char ** argv, int opt, ImageOptions * opts) 
 
     } else if ( !strcmp("--height", argv[opt]) ) {
         height = get_opt_int_param(argc, argv, opt);
-        if (height < 0) {
-            fprintf(stderr, "[ERR] Height is non-zero!\n");
+        if (height > MAX_IMG_SIZE) {
+            fprintf(stderr, "[ERR] Height exceeds maximum image size!\n");
             return -1;
         }
         opts->height = height;
