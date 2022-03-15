@@ -155,7 +155,7 @@ int main(int argc, char ** argv) {
         int ret = read_and_convert(fj_iter->file_path, fj_iter->file_opts);
         if (ret == -1)
             fprintf(stderr, "Failed to convert image: %s\n", fj_iter->file_path);
-        printf("\n");
+        printf("\033[0m\n");
     }
 
     // Free job memory!

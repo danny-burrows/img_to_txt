@@ -40,8 +40,8 @@ void free_job_memory(FileJob * job_list) {
 }
 
 static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts) {
-    int width;
-    int height;
+    unsigned int width;
+    unsigned int height;
     int read_param = 0;
 
     for (size_t c = 1; c < strlen(argv[opt]); c++) {
@@ -60,7 +60,7 @@ static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts
                     fprintf(stderr, "[ERR] Width is non-zero!\n");
                     return -1;
                 }
-                opts->width = (unsigned int)width;
+                opts->width = width;
                 read_param = 1;
                 break;
             case 'h':
@@ -69,7 +69,7 @@ static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts
                     fprintf(stderr, "[ERR] Height is non-zero!\n");
                     return -1;
                 }
-                opts->height = (unsigned int)height;
+                opts->height = height;
                 read_param = 1;
                 break;
 
@@ -181,9 +181,9 @@ FileJob * arg_parse(int argc, char ** argv) {
 
     // Go through all args after program name.
     for (int opt = 1; opt < argc; opt++) {
-// #ifdef DEBUG_CONFIG_SET
+#ifdef DEBUG_CONFIG_SET
         printf("[DEBUG] Opt[%d]: %s\n", opt, argv[opt]);
-// #endif
+#endif
 
         // If not an opt then add to linked list.
         if (argv[opt][0] != '-') {
