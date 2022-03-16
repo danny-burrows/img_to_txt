@@ -8,9 +8,7 @@
 
 #include "options.h"
 
-// #define STR_EQUAL 0      // deprecated
-
-#define VERSION "v0.2.0"
+#define VERSION "v0.3.0"
 
 #define HELP "Usage: img_to_txt [OPTION]... [FILE]...                       \n\
 Convert images to text. Either Ascii, Ansi (true colour),                   \n\
@@ -54,7 +52,7 @@ Examples:                                                                   \n\
                                                                             \n\
     img_to_txt -whqt 30 some_img.png                                        \n\
                                                                             \n\
-    img_to_txt some_img.jpg -a                                              \n\
+    img_to_txt -a some_img.jpg                                              \n\
                                                                             \n\
     img_to_txt -q -t -o some_img.bmp                                        \n\
 "

@@ -1,10 +1,16 @@
 /*
-NOTE: Eventually true color should not be the default.
-
 TODO:
-    - Debug what happens when piped to a file.
-    - Improve the scale for plane ASCII output.
-    - Windows support.
+    - Debug arguments parsing behaviour.
+    - Options at beginning or end applied to all unless specified otherwise?
+    
+    - Improve 'scale' for plane ASCII output.
+    - Preserve aspect-ratio option.
+    
+    - Check if 256 colors is default.
+    - Check if rbg colors are widely supported.
+    - Translating from rgb into 256 colors.
+    
+    - Windows support?
 */
 
 #include <stdio.h>

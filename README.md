@@ -69,7 +69,7 @@ Examples:
                                                                             
     img_to_txt -whqt 30 some_img.png                                        
                                                                             
-    img_to_txt some_img.jpg -a                                              
+    img_to_txt -a some_img.jpg                                              
                                                                             
     img_to_txt -q -t -o some_img.bmp                                                                     
 ```
