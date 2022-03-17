@@ -1,6 +1,7 @@
 <div align="center">
     <img src="img_to_txt.svg" style="width: 80%;" />
 </div>
+<br/>
 
 <strong>img_to_txt</strong> is still in early development but feel free to try it out! See the Build and Usage sections for more details on getting started. If you'd like to get involved please see the Contributing section. Also please submit an issue if you have any issues using or building.
 
@@ -77,7 +78,7 @@ Examples:
 ## Contributing
 Please, if you come accross any bugs or issues feel free to submit them on the issues page of the github. Pull requests are accepted too. :-)
 
-If you'd like to get involved with the development download the source and open with vscode. A development environment should be setup for you. You'll need gcc, gdb and make.
+If you'd like to get involved with the development fork and download the source! You'll need gcc, gdb and make. The makefile should contain all you need to get started building in debug mode.
 
 ### If you want a debug build...
 ```bash
