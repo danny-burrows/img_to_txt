@@ -1,5 +1,5 @@
-#ifndef IMG_TO_TXT_ARG_H
-#define IMG_TO_TXT_ARG_H
+#ifndef ARG_H
+#define ARG_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -68,4 +68,4 @@ FileJob * arg_parse(int argc, char ** argv);
 
 void free_job_memory(FileJob * job_list);
 
-#endif
+#endif  /* ARG_H */
