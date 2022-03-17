@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 #include "options.h"
+#include "list.h"
 
 #define VERSION "v0.3.0"
 
@@ -58,14 +59,13 @@ Examples:                                                                   \n\
 "
 
 
-typedef struct FileJob {
+struct FileJob {
     char * file_path;
-    ImageOptions * file_opts;
-    struct FileJob * next_job;
-} FileJob;
+    struct ImageOptions * file_opts;
+    struct list_node list;
+};
 
-FileJob * arg_parse(int argc, char ** argv);
-
-void free_job_memory(FileJob * job_list);
+void free_job_memory(struct list_node * job_list);
+int arg_parse(int argc, char ** argv, struct list_node * jobs);
 
 #endif  /* ARG_H */
