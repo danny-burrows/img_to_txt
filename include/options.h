@@ -1,5 +1,5 @@
-#ifndef IMG_TO_TXT_OPTIONS_H
-#define IMG_TO_TXT_OPTIONS_H
+#ifndef OPTIONS_H
+#define OPTIONS_H
 
 // Some preprocessor magic to generate an enum and string array with the same items.
 #define OUTPUT_MODES(MODE) \
@@ -25,4 +25,4 @@ typedef struct {
     bool suppress_header;
 } ImageOptions;
 
-#endif
+#endif  /* OPTIONS_H */
