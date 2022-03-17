@@ -30,7 +30,7 @@ TODO:
 #include "options.h"
 #include "terminal.h"
 #include "arg_parse.h"
-
+#include "list.h"
 
 typedef struct {
     unsigned char r;
@@ -57,7 +57,7 @@ unsigned char calc_ascii_char(PixelData * p) {
 }
 
 
-int read_and_convert(char * filepath, ImageOptions * options) {
+int read_and_convert(char * filepath, struct ImageOptions * options) {
     int rwidth, rheight, rchannels;
     unsigned char * read_data = stbi_load(filepath, &rwidth, &rheight, &rchannels, 3);
 
@@ -152,20 +152,34 @@ int main(int argc, char ** argv) {
     printf("[DEBUG] ASCII Brightness levels: %d\n", brightness_levels);
 #endif
 
-    FileJob * jobs = arg_parse(argc, argv);
-    if (jobs == NULL)
+    // HEAD of FileJob struct list
+    LIST_HEAD(job_list);
+
+    if (arg_parse(argc, argv, &job_list) == -1) {
+        fprintf(stderr, "argument parsing failed!\n");
         return EXIT_FAILURE;
+    }
+
+    if (job_list.next == NULL) {
+        fprintf(stderr, "No files to convert! (-? for help text)\n");
+        return EXIT_FAILURE;
+    }
 
     // Parse file paths and do all jobs.
-    for (FileJob * fj_iter = jobs; fj_iter != NULL; fj_iter = fj_iter->next_job) {    
-        int ret = read_and_convert(fj_iter->file_path, fj_iter->file_opts);
-        if (ret == -1)
-            fprintf(stderr, "Failed to convert image: %s\n", fj_iter->file_path);
+    struct list_node *iter;
+
+    list_for_each(iter, &job_list) {
+        struct FileJob *job = container_of(iter, struct FileJob, list);
+        int ret = read_and_convert(job->file_path, job->file_opts);
+        if (ret == -1) {
+            fprintf(stderr, "Failed to convert image: %s\n", job->file_path);
+            return EXIT_FAILURE;
+        }
         printf("\033[0m\n");
     }
 
     // Free job memory!
-    free_job_memory(jobs);
+    free_job_memory(&job_list);
 
     return EXIT_SUCCESS;
 }

@@ -1,6 +1,8 @@
 #include "arg_parse.h"
 
-#define MAX_IMG_SIZE 25000
+#define MAX_IMG_SIZE    25000
+#define SUCCESS         1
+#define FAILURE         -1
 
 static void print_version(void) {
     printf("img_to_text %s\n", VERSION);
@@ -32,16 +34,17 @@ static int get_opt_int_param(int argc, char ** argv, int opt) {
     return param;
 }
 
-void free_job_memory(FileJob * job_list) {
-    while (job_list != NULL) {
-        free(job_list->file_opts);
-        FileJob * next = job_list->next_job;
-        free(job_list);
-        job_list = next;
+void free_job_memory(struct list_node * job_list) {
+    struct list_node *iter;
+
+    list_for_each(iter, job_list) {
+        struct FileJob *job = container_of(iter, struct FileJob, list);
+        free(job->file_opts);
+        free(job);
     }
 }
 
-static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts) {
+static int parse_short_args(int argc, char ** argv, int opt, struct ImageOptions * opts) {
     unsigned int width;
     unsigned int height;
     int read_param = 0;
@@ -103,7 +106,7 @@ static int parse_short_args(int argc, char ** argv, int opt, ImageOptions * opts
     return read_param;
 }
 
-static int parse_long_arg(int argc, char ** argv, int opt, ImageOptions * opts) {
+static int parse_long_arg(int argc, char ** argv, int opt, struct ImageOptions * opts) {
     unsigned int width;
     unsigned int height;
     int read_param = 0;
@@ -163,23 +166,27 @@ static int parse_long_arg(int argc, char ** argv, int opt, ImageOptions * opts) 
 }
 
 /**
- * Returns a pointer to FileJobs linked list or NULL.
+ * @brief Parse arguments with FileJob struct
+ * 
+ * @param argc the count of arguments
+ * @param argv pointer of arguments passed by command
+ * @param jobs head pointer of singly linked list
+ * @return int SUCCESS or FAILURE
  */
-FileJob * arg_parse(int argc, char ** argv) {
-    // HEAD of FileJob struct list
-    FileJob * jobs = NULL;
+int arg_parse(int argc, char ** argv, struct list_node * jobs) {
     int read_param = 0;
 
     // If a user give mutiple files without any given options before,
     // then files that have not any options would get a default_opts.
-    ImageOptions default_opts = {
+    struct ImageOptions default_opts = {
         .output_mode = ANSI,
         .original_size = false,
         .true_color = true,
         .squashing_enabled = true,
         .suppress_header = false
     };
-    ImageOptions opts = default_opts;
+    struct ImageOptions opts;
+    memcpy(&opts, &default_opts, sizeof(struct ImageOptions));
 
     // Go through all args after program name.
     for (int opt = 1; opt < argc; opt++) {
@@ -189,25 +196,27 @@ FileJob * arg_parse(int argc, char ** argv) {
 
         // If not an opt then add to linked list.
         if (argv[opt][0] != '-') {
-            FileJob * job = (FileJob *) malloc(sizeof(FileJob));
+            struct FileJob * job = (struct FileJob *)malloc(sizeof(struct FileJob));
             if (job == NULL) {
                 perror("arg_parse: FileJob - Couldn't allocate memory!");
-                return NULL;
+                return FAILURE;
             }
 
             // Initialize the ImageOptions with opts
-            job->file_opts = (ImageOptions *) malloc(sizeof(ImageOptions));
+            job->file_opts = (struct ImageOptions *)malloc(sizeof(struct ImageOptions));
             if (job->file_opts == NULL) {
                 perror("arg_parse: ImageOptions - Couldn't allocate memory!");
-                return NULL;
+                return FAILURE;
             }
             
-            memcpy(job->file_opts, &opts, sizeof(ImageOptions));
+            memcpy(job->file_opts, &opts, sizeof(struct ImageOptions));
             opts = default_opts;    // Prevent options from remaining prior opts value
 
             job->file_path = argv[opt];
-            job->next_job = jobs;
-            jobs = job;
+            job->list.next = NULL;
+            if (list_add(jobs, &job->list) < 0) {
+                return FAILURE;
+            }
             continue;
         } else if (argv[opt][0] == '-' && argv[opt][1] == '-') {
             read_param = parse_long_arg(argc, argv, opt, &opts);
@@ -216,14 +225,13 @@ FileJob * arg_parse(int argc, char ** argv) {
         }
 
         if (read_param == -1) {
-            return NULL;
+            // Error message is already printed in parse_{long,short}_arg{s}().
+            return FAILURE;
         } else {
             // Skip arguments if there were additionally used one.
             opt += read_param;
         }
     }
 
-    if (jobs == NULL)
-        fprintf(stderr, "No files to convert! (-? for help text)\n");
-    return jobs;
+    return SUCCESS;
 }
