@@ -11,10 +11,13 @@
 #define VERSION "v0.3.0"
 
 #define HELP "Usage: img_to_txt [OPTION]... [FILE]...                       \n\
+                                                                            \n\
 Convert images to text. Either Ascii, Ansi (true colour),                   \n\
 or solid background (Ansi true color).                                      \n\
                                                                             \n\
+                                                                            \n\
 Available input image types:                                                \n\
+                                                                            \n\
     - jpg/jpeg                                                              \n\
     - png                                                                   \n\
     - bmp                                                                   \n\
@@ -24,7 +27,9 @@ Available input image types:                                                \n\
     - pic (not tested yet)                                                  \n\
     - ppm/pnm/pgm                                                           \n\
                                                                             \n\
+                                                                            \n\
 Options:                                                                    \n\
+                                                                            \n\
     -w --width          Set width and height (rows and cols) of output.     \n\
     -h --height                                                             \n\
                                                                             \n\
@@ -45,6 +50,7 @@ Options:                                                                    \n\
     -? --help           Print help message and exit.                        \n\
                                                                             \n\
     -v --version        Print version and exit.                             \n\
+                                                                            \n\
                                                                             \n\
 Examples:                                                                   \n\
                                                                             \n\

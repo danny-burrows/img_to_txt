@@ -29,10 +29,13 @@ $ make
 ## Usage (Proper docs coming soon)
 ```
 Usage: img_to_txt [OPTION]... [FILE]...                       
+
 Convert images to text. Either Ascii, Ansi (true colour),                   
 or solid background (Ansi true color).                                      
                                                                             
+
 Available input image types:                                                
+
     - jpg/jpeg                                                              
     - png                                                                   
     - bmp                                                                   
@@ -42,7 +45,9 @@ Available input image types:
     - pic (not tested yet)                                                  
     - ppm/pnm/pgm                                                           
                                                                             
+
 Options:                                                                    
+
     -w --width          Set width and height (rows and cols) of output.     
     -h --height                                                             
                                                                             
@@ -64,6 +69,7 @@ Options:
                                                                             
     -v --version        Print version and exit.                             
                                                                             
+
 Examples:                                                                   
                                                                             
     img_to_txt -h 100 -w 200 -s some_img.png                                
