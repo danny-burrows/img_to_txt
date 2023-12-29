@@ -34,7 +34,6 @@ static int get_opt_int_param(int argc, char ** argv, int opt) {
 
 void free_job_memory(FileJob * job_list) {
     while (job_list != NULL) {
-        free(job_list->file_opts);
         FileJob * next = job_list->next_job;
         free(job_list);
         job_list = next;
@@ -171,16 +170,13 @@ FileJob * arg_parse(int argc, char ** argv) {
     FileJob * current_job = NULL;
     int read_param = 0;
 
-    // If a user give mutiple files without any given options before,
-    // then files that have not any options would get a default_opts.
-    ImageOptions default_opts = {
+    ImageOptions opts = {
         .output_mode = ANSI,
         .original_size = false,
         .true_color = true,
         .squashing_enabled = true,
         .suppress_header = false
     };
-    ImageOptions opts = default_opts;
 
     // Go through all args after program name.
     for (int opt = 1; opt < argc; opt++) {
@@ -196,15 +192,7 @@ FileJob * arg_parse(int argc, char ** argv) {
                 return NULL;
             }
 
-            // Initialize the ImageOptions with opts
-            job->file_opts = (ImageOptions *) malloc(sizeof(ImageOptions));
-            if (job->file_opts == NULL) {
-                perror("arg_parse: ImageOptions - Couldn't allocate memory!");
-                return NULL;
-            }
-            
-            memcpy(job->file_opts, &opts, sizeof(ImageOptions));
-            opts = default_opts;    // Prevent options from remaining prior opts value
+            memcpy(&job->file_opts, &opts, sizeof(ImageOptions));
 
             job->file_path = argv[opt];
             if (jobs == NULL) {

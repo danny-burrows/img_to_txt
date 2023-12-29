@@ -158,7 +158,7 @@ int main(int argc, char ** argv) {
 
     // Parse file paths and do all jobs.
     for (FileJob * fj_iter = jobs; fj_iter != NULL; fj_iter = fj_iter->next_job) {    
-        int ret = read_and_convert(fj_iter->file_path, fj_iter->file_opts);
+        int ret = read_and_convert(fj_iter->file_path, &fj_iter->file_opts);
         if (ret == -1)
             fprintf(stderr, "Failed to convert image: %s\n", fj_iter->file_path);
         printf("\033[0m\n");

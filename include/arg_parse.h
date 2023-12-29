@@ -66,7 +66,7 @@ Examples:                                                                   \n\
 
 typedef struct FileJob {
     char * file_path;
-    ImageOptions * file_opts;
+    ImageOptions file_opts;
     struct FileJob * next_job;
 } FileJob;
 
