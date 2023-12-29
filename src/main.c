@@ -1,8 +1,5 @@
 /*
 TODO:
-    - Debug arguments parsing behaviour.
-    - Options at beginning or end applied to all unless specified otherwise?
-    
     - Improve 'scale' for plane ASCII output.
     - Preserve aspect-ratio option.
     
