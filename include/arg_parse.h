@@ -12,7 +12,7 @@
 
 #define HELP "Usage: img_to_txt [OPTION]... [FILE]...                       \n\
                                                                             \n\
-Convert images to text. Either Ascii, Ansi (true colour),                   \n\
+Convert images to text. Either Ascii, Ansi (true color),                    \n\
 or solid background (Ansi true color).                                      \n\
                                                                             \n\
                                                                             \n\

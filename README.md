@@ -30,7 +30,7 @@ $ make
 ```
 Usage: img_to_txt [OPTION]... [FILE]...                       
 
-Convert images to text. Either Ascii, Ansi (true colour),                   
+Convert images to text. Either Ascii, Ansi (true color),                    
 or solid background (Ansi true color).                                      
                                                                             
 
