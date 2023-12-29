@@ -21,7 +21,7 @@ TODO:
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
-#include "stb_image_resize.h"
+#include "stb_image_resize2.h"
 #pragma GCC diagnostic pop
 
 #include "options.h"
@@ -80,7 +80,7 @@ int read_and_convert(char * filepath, ImageOptions * options) {
     if (desired_width != (unsigned)rwidth || desired_height != (unsigned)rheight) {
                                         //3 * uint8 for RGB!
         unsigned char * new_data = malloc(3 * sizeof(unsigned char) * desired_width * desired_height);
-        int r = stbir_resize_uint8(
+        stbir_pixel_layout r = (stbir_pixel_layout)stbir_resize_uint8_linear(
             read_data, rwidth, rheight, 0,
             new_data, desired_width, desired_height, 0, 3
         );
