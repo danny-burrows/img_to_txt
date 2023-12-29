@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include "terminal.h"
 
 #define TERM_PADDING_X 8
@@ -12,6 +14,13 @@ void get_term_size(int *restrict width, int *restrict height) {
 }
 
 void get_ideal_image_size(int *restrict width, int *restrict height, const int image_width, const int image_height, bool squashing_enabled) {
+    // Check if output is not a terminal (if not we're probably piping the output) and thus return original size.
+    if (isatty(STDOUT_FILENO) == false) {
+        *width = image_width;
+        *height = image_height;
+        return;
+    }
+
     *width = squashing_enabled ? image_width * 2 : image_width; // <- NOTE: This is to offset narrow chars. 
     *height = image_height;
     double aspect_ratio = (double)*width / (double)*height;
