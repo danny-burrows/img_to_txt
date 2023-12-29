@@ -168,6 +168,7 @@ static int parse_long_arg(int argc, char ** argv, int opt, ImageOptions * opts) 
 FileJob * arg_parse(int argc, char ** argv) {
     // HEAD of FileJob struct list
     FileJob * jobs = NULL;
+    FileJob * current_job = NULL;
     int read_param = 0;
 
     // If a user give mutiple files without any given options before,
@@ -206,8 +207,13 @@ FileJob * arg_parse(int argc, char ** argv) {
             opts = default_opts;    // Prevent options from remaining prior opts value
 
             job->file_path = argv[opt];
-            job->next_job = jobs;
-            jobs = job;
+            if (jobs == NULL) {
+                jobs = job;
+                current_job = job;
+            } else {
+                current_job->next_job = job;
+                current_job = job;
+            }
             continue;
         } else if (argv[opt][0] == '-' && argv[opt][1] == '-') {
             read_param = parse_long_arg(argc, argv, opt, &opts);
