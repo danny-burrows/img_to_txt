@@ -25,6 +25,8 @@ TODO:
 #pragma GCC diagnostic pop
 
 #include "options.h"
+static const char * OutputModeStr[] = {OUTPUT_MODES(GENERATE_STRING)}; // Strings used for output.
+
 #include "terminal.h"
 #include "arg_parse.h"
 
