@@ -1,6 +1,6 @@
 CC=gcc
 
-ENABLE_EXTRA_WARNINGS_AS_ERRORS = -Werror -Wall -Wextra -pedantic -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wundef -fdiagnostics-show-option
+ENABLE_EXTRA_WARNINGS_AS_ERRORS = -Werror -Wall -Wextra -pedantic -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wundef -fdiagnostics-show-option -fsanitize=signed-integer-overflow
 DISABLED_WARNINGS = -Wno-unused
 
 IDIR =./include
