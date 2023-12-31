@@ -14,10 +14,6 @@ TODO:
 #include <string.h>
 #include <stdbool.h>
 
-// Disable some warnings for stb headers.
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wcast-qual"
-#pragma GCC diagnostic ignored "-Wstrict-overflow"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
