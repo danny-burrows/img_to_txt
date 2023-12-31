@@ -3,6 +3,3 @@ img_to_txt
 
 # Object files
 obj/
-
-# Tools
-.vscode/
