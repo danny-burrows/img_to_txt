@@ -20,7 +20,7 @@ pnm/pgm/ppm   | Binary only
 
 ## Platforms Supported
 
-Only tested on Linux so far but minimal changes would be needed to support other platforms.
+Only tested on Linux so far however minimal changes would be needed to support other platforms.
 
 ## Build
 
@@ -88,9 +88,9 @@ Examples:
 
 ## Contributing
 
-If you come across bugs or problems with this software please feel free to [submit in issue on github](https://github.com/danny-burrows/img_to_txt/issues). Pull requests are accepted too. :-)
+If you come across bugs or problems with this software please feel free to [submit in issue on GitHub](https://github.com/danny-burrows/img_to_txt/issues). Pull requests are accepted too. :-)
 
-If you'd like to get involved with the development then fork and download the source! You'll just need gcc and make. The makefile should contain everything you need to get building in debug mode (see section below).
+If you'd like to get involved with the development then fork and download the source! You'll just need `gcc` and `make`. The Makefile should contain everything you need to get building in debug mode (see section below).
 
 ### Building in debug mode
 ```bash
